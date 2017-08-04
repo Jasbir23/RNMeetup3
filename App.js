@@ -4,7 +4,13 @@ import Expo from "expo";
 import SurveyScreen from "./src/SurveyScreen.js";
 import TodaySchedule from "./src/TodaySchedule.js";
 import TyperScreen from "./src/TyperScreen.js";
+import Question from "./src/Question.js";
+import { firebaseConfig } from "./src/config/firebase";
 import MainStack from "./src/MainStack.js";
+
+import * as firebase from 'firebase';
+
+firebase.initializeApp(firebaseConfig);
 
 export default class App extends React.Component {
   constructor() {
@@ -22,6 +28,9 @@ export default class App extends React.Component {
     this.setState({ isReady: "true" });
   }
   render() {
+    if (!this.state.isReady) {
+      return <Expo.AppLoading />;
+    }
     return <MainStack />;
   }
 }
