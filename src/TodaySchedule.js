@@ -16,12 +16,20 @@ import {
   Thumbnail
 } from "native-base";
 export default class HeaderExample extends Component {
+  static navigationOptions = () => ({
+    header: null
+  });
   render() {
     return (
       <Container>
         <Header>
           <Left>
-            <Button transparent>
+            <Button
+              transparent
+              onPress={() => {
+                this.props.navigation.navigate("DrawerOpen");
+              }}
+            >
               <Icon name="menu" />
             </Button>
           </Left>

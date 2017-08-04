@@ -4,6 +4,7 @@ import Expo from "expo";
 import SurveyScreen from "./src/SurveyScreen.js";
 import TodaySchedule from "./src/TodaySchedule.js";
 import TyperScreen from "./src/TyperScreen.js";
+import MainStack from "./src/MainStack.js";
 
 export default class App extends React.Component {
   constructor() {
@@ -21,10 +22,7 @@ export default class App extends React.Component {
     this.setState({ isReady: "true" });
   }
   render() {
-    if (!this.state.isReady) {
-      return <Expo.AppLoading />;
-    }
-    return <SurveyScreen />;
+    return <MainStack />;
   }
 }
 
