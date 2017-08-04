@@ -2,6 +2,8 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Expo from "expo";
 import SurveyScreen from "./src/SurveyScreen.js";
+import TodaySchedule from "./src/TodaySchedule.js";
+import TyperScreen from "./src/TyperScreen.js";
 
 export default class App extends React.Component {
   constructor() {
@@ -18,7 +20,7 @@ export default class App extends React.Component {
     this.setState({ isReady: "true" });
   }
   render() {
-    return <SurveyScreen />;
+    return <TyperScreen />;
   }
 }
 
