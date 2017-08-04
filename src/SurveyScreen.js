@@ -14,27 +14,39 @@ import {
 } from "native-base";
 
 import * as firebase from 'firebase';
-import { firebaseConfig } from './config/firebase';
 
-firebase.initializeApp(firebaseConfig);
 
 export default class FloatingLabelExample extends Component {
 
   constructor(props) {
     super(props);
     this.state={
-      name: ''
+      form :{
+        Name: '',
+        Age: '',
+        Occupation: '',
+        Employer: ''
+      }
     }
     this._onSubmitClick = this._onSubmitClick.bind(this);
+    this._onFormValueChanged = this._onFormValueChanged.bind(this);
   }
 
   _onSubmitClick() {
-    firebase.database().ref('Users/' + this.state.name).set({
-      name: this.state.name,
-      age: 22,
-      Occupation: 'Software Developer'
+    firebase.database().ref('Users/' + this.state.form.Name).set({
+      name: this.state.form.Name,
+      age: this.state.form.Age,
+      Occupation: this.state.form.Occupation,
+      Employer: this.state.form.Employer,
     });
+  }
 
+  _onFormValueChanged(formName, val) {
+    let form = this.state.form;
+    if(val !== '') {
+      form[ formName ] = val;
+    }
+    this.setState( { form: form } )
   }
   componentDidMount() {
                 // Firebase
@@ -61,19 +73,19 @@ export default class FloatingLabelExample extends Component {
           <Form>
             <Item floatingLabel>
               <Label>Name</Label>
-              <Input onChangeText={(val) => this.setState({ name: val })}/>
+              <Input onChangeText={(val) => this._onFormValueChanged('Name', val)}/>
             </Item>
             <Item floatingLabel last>
               <Label>Age</Label>
-              <Input />
+              <Input onChangeText={(val) => this._onFormValueChanged('Age', val)} />
             </Item>
             <Item floatingLabel last>
               <Label>Occupation</Label>
-              <Input />
+              <Input onChangeText={(val) => this._onFormValueChanged('Occupation', val)}/>
             </Item>
             <Item floatingLabel last>
               <Label>Employer</Label>
-              <Input />
+              <Input onChangeText={(val) => this._onFormValueChanged('Employer', val)}/>
             </Item>
           </Form>
           <View style={{ padding: 10 }}>
