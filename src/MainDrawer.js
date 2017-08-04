@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import TodaySchedule from "./TodaySchedule.js";
-import TyperScreen from "./TyperScreen.js";
 import SideBar from "./SideBar.js";
 import { DrawerNavigator } from "react-navigation";
+import QuestionScreen from "./Question.js";
 const HomeScreenRouter = DrawerNavigator(
   {
     TodaySchedule: { screen: TodaySchedule },
-    TyperScreen: { screen: TyperScreen }
+    QuestionScreen: { screen: QuestionScreen }
   },
   {
     contentComponent: props => <SideBar {...props} />

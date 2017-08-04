@@ -14,8 +14,7 @@ import {
 } from "native-base";
 
 import * as firebase from 'firebase';
-
-
+let requiredFields = ["Name", "Email", "IAmHere"];
 export default class FloatingLabelExample extends Component {
   static navigationOptions = () => ({
     header: null
@@ -25,46 +24,60 @@ export default class FloatingLabelExample extends Component {
     this.state={
       form :{
         Name: '',
-        Age: '',
-        Occupation: '',
-        Employer: ''
-      }
+        Age: 0,
+        Gender: '',
+        Developer: '',
+        Organization: '',
+        PhoneNumber: 0,
+        Email: '',
+        IAmHere: ''
+      },
+      requiredErrors: []
     }
     this._onSubmitClick = this._onSubmitClick.bind(this);
     this._onFormValueChanged = this._onFormValueChanged.bind(this);
+    this._checkValidation = this._checkValidation.bind(this);
   }
 
   _onSubmitClick() {
-    // firebase.database().ref('Users/' + this.state.form.Name).set({
-    //   name: this.state.form.Name,
-    //   age: this.state.form.Age,
-    //   Occupation: this.state.form.Occupation,
-    //   Employer: this.state.form.Employer,
-    // });
-    this.props.navigation.navigate("MainDrawer");
+    this._checkValidation();
   }
 
   _onFormValueChanged(formName, val) {
     let form = this.state.form;
-    if(val !== '') {
-      form[ formName ] = val;
-    }
+    form[ formName ] = val;
     this.setState( { form: form } )
   }
-  componentDidMount() {
-    // Firebase
-    firebase.database().ref("Questions/").on("value", snapshot => {
-      const highscore = snapshot.val();
-      console.log(highscore);
-    });
-    //Questions Listener
-    // firebase.database().ref('Questions/').on('value', (snapshot) => {
-    //   const questions = snapshot.val();
-    //   console.log(questions);
-    // });
+
+  _checkValidation() {
+    let requiredErrors = [];
+    let form = this.state.form;
+    requiredFields.map((item, index) => {
+      if(form[item] === '') {
+        requiredErrors.push(item)
+      }
+    })
+    if(requiredErrors.length !== 0) {
+      let message = requiredErrors.join(",");
+      console.log(message, 'message');
+      alert(message + ' is Empty')
+    } else {
+      firebase.database().ref('Users/' + this.state.form.Email).set({
+        Name: this.state.form.Name,
+        Age: this.state.form.Age,
+        Gender: this.state.form.Gender,
+        Developer: this.state.form.Developer,
+        Organization: this.state.form.Organization,
+        PhoneNumber: this.state.form.PhoneNumber,
+        Email: this.state.form.Email,
+        IAmHere: this.state.form.IAmHere,
+      });
+      this.props.navigation.navigate("MainDrawer");
+    }
   }
+
+
   render() {
-    console.log(this.state.name);
     return (
       <Container>
         <Header>
@@ -76,7 +89,9 @@ export default class FloatingLabelExample extends Component {
           <Form>
             <Item floatingLabel>
               <Label>Name</Label>
-              <Input onChangeText={(val) => this._onFormValueChanged('Name', val)}/>
+              <Input onChangeText={(val) => this._onFormValueChanged('Name', val)}/>{
+
+              }
             </Item>
             <Item floatingLabel last>
               <Label>Age</Label>
@@ -84,27 +99,27 @@ export default class FloatingLabelExample extends Component {
             </Item>
             <Item floatingLabel last>
               <Label>Gender</Label>
-              <Input />
-              <Item floatingLabel last>
-                <Label>I am a Native/Web/React developer..</Label>
-                <Input />
-              </Item>
+              <Input onChangeText={(val) => this._onFormValueChanged('Gender', val)}/>
+            </Item>
+            <Item floatingLabel last>
+              <Label>I am a Native/Web/React developer..</Label>
+              <Input onChangeText={(val) => this._onFormValueChanged('Developer', val)}/>
             </Item>
             <Item floatingLabel last>
               <Label>Organization</Label>
-              <Input />
+              <Input onChangeText={(val) => this._onFormValueChanged('Organization', val)}/>
             </Item>
             <Item floatingLabel last>
               <Label>Phone No</Label>
-              <Input />
+              <Input onChangeText={(val) => this._onFormValueChanged('PhoneNumber', val)}/>
             </Item>
             <Item floatingLabel last>
               <Label>e-mail</Label>
-              <Input />
+              <Input onChangeText={(val) => this._onFormValueChanged('Email', val)}/>
             </Item>
             <Item floatingLabel last>
               <Label>I am here because...</Label>
-              <Input />
+              <Input onChangeText={(val) => this._onFormValueChanged('IAmHere', val)}/>
             </Item>
           </Form>
           <View style={{ padding: 10 }}>

@@ -77,7 +77,7 @@ export default class Question extends Component {
             <Text>Questions</Text>
           </Body>
         </Header>
-        <Content padder>
+        <Content padder style={{ backgroundColor: 'white' }}>
         {
           this.state.questions || this.state.selectedQuestion
           ? <View>

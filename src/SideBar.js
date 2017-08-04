@@ -1,7 +1,7 @@
 import React from "react";
 import { Image, StatusBar, TouchableOpacity } from "react-native";
 import { Container, Content, Text, List, ListItem } from "native-base";
-const routes = ["TodaySchedule", "TyperScreen"];
+const routes = ["TodaySchedule", "QuestionScreen"];
 export default class SideBar extends React.Component {
   render() {
     return (
