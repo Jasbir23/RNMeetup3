@@ -14,6 +14,9 @@ import {
   Input
 } from "native-base";
 export default class TyperScreen extends Component {
+  static navigationOptions = () => ({
+    header: null
+  });
   constructor(props) {
     super(props);
     this.state = {
@@ -25,7 +28,12 @@ export default class TyperScreen extends Component {
       <Container>
         <Header>
           <Left>
-            <Button transparent>
+            <Button
+              transparent
+              onPress={() => {
+                this.props.navigation.navigate("DrawerOpen");
+              }}
+            >
               <Icon name="menu" />
             </Button>
           </Left>

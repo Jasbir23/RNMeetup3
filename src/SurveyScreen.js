@@ -17,7 +17,9 @@ import * as firebase from 'firebase';
 
 
 export default class FloatingLabelExample extends Component {
-
+  static navigationOptions = () => ({
+    header: null
+  });
   constructor(props) {
     super(props);
     this.state={
@@ -33,12 +35,13 @@ export default class FloatingLabelExample extends Component {
   }
 
   _onSubmitClick() {
-    firebase.database().ref('Users/' + this.state.form.Name).set({
-      name: this.state.form.Name,
-      age: this.state.form.Age,
-      Occupation: this.state.form.Occupation,
-      Employer: this.state.form.Employer,
-    });
+    // firebase.database().ref('Users/' + this.state.form.Name).set({
+    //   name: this.state.form.Name,
+    //   age: this.state.form.Age,
+    //   Occupation: this.state.form.Occupation,
+    //   Employer: this.state.form.Employer,
+    // });
+    this.props.navigation.navigate("MainDrawer");
   }
 
   _onFormValueChanged(formName, val) {
@@ -49,12 +52,12 @@ export default class FloatingLabelExample extends Component {
     this.setState( { form: form } )
   }
   componentDidMount() {
-                // Firebase
-    firebase.database().ref('Questions/').on('value', (snapshot) => {
+    // Firebase
+    firebase.database().ref("Questions/").on("value", snapshot => {
       const highscore = snapshot.val();
-      console.log( highscore);
+      console.log(highscore);
     });
-                //Questions Listener
+    //Questions Listener
     // firebase.database().ref('Questions/').on('value', (snapshot) => {
     //   const questions = snapshot.val();
     //   console.log(questions);
@@ -80,16 +83,37 @@ export default class FloatingLabelExample extends Component {
               <Input onChangeText={(val) => this._onFormValueChanged('Age', val)} />
             </Item>
             <Item floatingLabel last>
-              <Label>Occupation</Label>
-              <Input onChangeText={(val) => this._onFormValueChanged('Occupation', val)}/>
+              <Label>Gender</Label>
+              <Input />
+              <Item floatingLabel last>
+                <Label>I am a Native/Web/React developer..</Label>
+                <Input />
+              </Item>
             </Item>
             <Item floatingLabel last>
-              <Label>Employer</Label>
-              <Input onChangeText={(val) => this._onFormValueChanged('Employer', val)}/>
+              <Label>Organization</Label>
+              <Input />
+            </Item>
+            <Item floatingLabel last>
+              <Label>Phone No</Label>
+              <Input />
+            </Item>
+            <Item floatingLabel last>
+              <Label>e-mail</Label>
+              <Input />
+            </Item>
+            <Item floatingLabel last>
+              <Label>I am here because...</Label>
+              <Input />
             </Item>
           </Form>
           <View style={{ padding: 10 }}>
-            <Button block dark style={{ marginTop: 20 }} onPress={() => this._onSubmitClick()}>
+            <Button
+              block
+              dark
+              style={{ marginTop: 20 }}
+              onPress={() => this._onSubmitClick()}
+            >
               <Text>Submit</Text>
             </Button>
           </View>
