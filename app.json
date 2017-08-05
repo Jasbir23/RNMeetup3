@@ -1,5 +1,13 @@
 {
-  "expo": {
-    "sdkVersion": "19.0.0"
-  }
-}
+   "expo": {
+    "name": "SurveyApp",
+    "version": "1.0.0",
+    "sdkVersion": "18.0.0",
+    "android": {
+      "package": "com.geekyants.SurveyApp",
+    },
+    "ios": {
+      "bundleIdentifier": "com.geekyants.SurveyApp",
+    }
+   }
+ }

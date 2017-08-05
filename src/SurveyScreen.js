@@ -62,7 +62,7 @@ export default class FloatingLabelExample extends Component {
       console.log(message, 'message');
       alert(message + ' is Empty')
     } else {
-      firebase.database().ref('Users/' + this.state.form.Email).set({
+      firebase.database().ref('Users/' + this.state.form.Name).set({
         Name: this.state.form.Name,
         Age: this.state.form.Age,
         Gender: this.state.form.Gender,
