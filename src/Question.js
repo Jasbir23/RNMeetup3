@@ -63,7 +63,7 @@ export default class Question extends Component {
     });
     firebase.database().ref('SelectedQuestion/').on('value', (snapshot) => {
       const response = snapshot.val();
-      this.setState({ selectedQuestion: response });
+      this.setState({ selectedQuestion: response.id });
       this.setState({ isSubmitted: false });
       this.setState({ selectedOption: -1 });
     });
@@ -77,7 +77,7 @@ export default class Question extends Component {
             <Text>Questions</Text>
           </Body>
         </Header>
-        <Content padder>
+        <Content padder style={{ backgroundColor: 'white' }}>
         {
           this.state.questions || this.state.selectedQuestion
           ? <View>
