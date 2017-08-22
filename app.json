@@ -1,5 +1,6 @@
 {
    "expo": {
+<<<<<<< HEAD
     "name": "PollApp",
     "version": "1.0.0",
     "sdkVersion": "19.0.0",
@@ -8,6 +9,16 @@
     },
     "ios": {
       "bundleIdentifier": "com.geekyants.PollApp",
+=======
+    "name": "SurveyApp",
+    "version": "1.0.0",
+    "sdkVersion": "18.0.0",
+    "android": {
+      "package": "com.geekyants.SurveyApp",
+    },
+    "ios": {
+      "bundleIdentifier": "com.geekyants.SurveyApp",
+>>>>>>> fd899f6ab36345384d7ff4fd7b75bff725869292
     }
    }
  }

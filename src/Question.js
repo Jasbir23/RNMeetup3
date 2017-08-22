@@ -76,7 +76,7 @@ export default class Question extends Component {
     });
     firebase.database().ref("SelectedQuestion/").on("value", snapshot => {
       const response = snapshot.val();
-      this.setState({ selectedQuestion: response });
+      this.setState({ selectedQuestion: response.id });
       this.setState({ isSubmitted: false });
       this.setState({ selectedOption: -1 });
     });
@@ -90,6 +90,7 @@ export default class Question extends Component {
             <Text>Questions</Text>
           </Body>
         </Header>
+<<<<<<< HEAD
         <Content padder>
           {this.state.questions || this.state.selectedQuestion
             ? <View>
@@ -119,6 +120,27 @@ export default class Question extends Component {
                           {this.state.isSubmitted
                             ? <Text>Submitted</Text>
                             : <Text>Submit</Text>}
+=======
+        <Content padder style={{ backgroundColor: 'white' }}>
+        {
+          this.state.questions || this.state.selectedQuestion
+          ? <View>
+          {
+            Object.keys(this.state.questions).map((item, index) => {
+              if(this.state.selectedQuestion === this.state.questions[item].id) {
+                console.log(item, 'val');
+                return (
+                  <View key={index} style={{ marginVertical: 10 }}>
+                    <Text>Q.{this.state.selectedQuestion + ' ' + item }</Text>
+                    <View style={{ marginVertical: 10 }}>
+                      {this._showOptions(this.state.questions[item])}
+                    </View>
+                    <Button onPress={() => this._onSubmitPress(this.state.questions[item], item)} disabled= {this.state.isSubmitted} style={{ alignSelf: 'center'}}>
+                      { this.state.isSubmitted
+                        ? <Text>Submitted</Text>
+                        : <Text>Submit</Text>
+                      }
+>>>>>>> fd899f6ab36345384d7ff4fd7b75bff725869292
 
                         </Button>
                       </View>
