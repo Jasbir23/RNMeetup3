@@ -1,5 +1,13 @@
 {
-  "expo": {
-    "sdkVersion": "19.0.0"
-  }
-}
+   "expo": {
+    "name": "PollApp",
+    "version": "1.0.0",
+    "sdkVersion": "19.0.0",
+    "android": {
+      "package": "com.geekyants.PollApp",
+    },
+    "ios": {
+      "bundleIdentifier": "com.geekyants.PollApp",
+    }
+   }
+ }
